@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 
 :root {
   font-size: 16px;
@@ -9,8 +8,7 @@
   --primary-color: #f5f5f5;
   --secondary-color: #e9ecef;
   --third-color: #dee2e6;
-  --fourth-color: #e9ecef;
-  --grey-light: #dee2e6;
+  --hover-color: #eeeff2;
 }
 
 ul,
@@ -19,12 +17,6 @@ body {
   margin: 0px;
 }
 
-* {
-  transition: all 0.2s ease-in-out;
-}
-
-body {
-}
 li {
   list-style-type: none;
 }
@@ -55,6 +47,7 @@ li {
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  width: 10rem;
   font-size: 2rem;
   font-weight: 600;
   padding: 0.8rem;
@@ -62,17 +55,17 @@ li {
   justify-self: center;
 
   background-color: var(--base-color);
+  transition: all 0.2s ease-in-out;
 }
 .logo:hover {
   transform: scale(1.02);
 }
 
 .logo > .material-symbols-outlined {
-  font-size: 3rem;
+  font-size: 2.4rem;
+  font-weight: 800;
 }
 
-.searchbar {
-}
 
 .searchbar-content {
   display: flex;
@@ -83,12 +76,9 @@ li {
   border: 0.125rem solid var(--third-color);
   justify-content: space-around;
 
-  height: 4rem;
+  height: 3rem;
   width: 24rem;
-}
-
-.searchbar-content:hover {
-  transform: scale(1.01);
+  transition: all 0.2s ease-in-out;
 }
 
 .searchbar-content > .material-symbols-outlined {
@@ -111,7 +101,7 @@ li {
   padding-top: 1rem;
   gap: 1rem;
 
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
 }
 
 .sidebar-title {
@@ -125,7 +115,7 @@ li {
 }
 
 .sidebar-basics {
-  background-color: var(--third-color);
+  background-color: var(--base-color);
   border-radius: 1rem;
 
   padding: 1rem;
@@ -140,27 +130,43 @@ li {
   gap: 1rem;
   font-size: 1rem;
 
-  padding: 0.6rem;
-  border: 0.1rem solid #e0e0e0;
+  padding: 0.8rem;
+  border: 0.15rem solid #e0e0e0;
   background-color: var(--base-color);
   border-radius: 1rem;
+  transition: all 0.2s ease-in-out;
 }
+
+.options-list > li:hover {
+  transform: scale(1.01);
+
+  cursor: pointer;
+  background-color: var(--hover-color);
+}
+
 .sidebar-basics > ul {
   display: flex;
   flex-flow: column;
   gap: 1rem;
 }
-.sidebar-options {
+.sidebar-projects {
   background-color: var(--base-color);
   border-radius: 1rem;
 
-  padding: 1rem;
+  padding: 0.2rem;
+ 
+
+
+
 }
 
-.sidebar-options > ul {
+.sidebar-projects > ul {
   display: flex;
   flex-flow: column;
   gap: 1rem;
+  padding: 1rem;
+  height: 20rem;
+  overflow-y: scroll;
 }
 
 .list-content {
@@ -170,10 +176,6 @@ li {
   border-radius: 2rem;
   padding: 2rem;
   margin: 1rem;
-}
-
-.options-list > li:hover {
-  transform: scale(1.01);
 }
 
 #content {

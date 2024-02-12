@@ -11,6 +11,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: "Odin Restaurant",
       template: "./src/template.html",
+      favicon: "./src/media/icon.png",
     }),
   ],
   output: {
