@@ -30,6 +30,7 @@ export function createProject() {
   loadProjects();
 }
 
+// TO-DO: use JSON instead of projects array
 export function loadProjects() {
   let projectsList = document.getElementById("projects-list");
   projectsList.innerHTML = "";
