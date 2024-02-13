@@ -1,48 +1,57 @@
 class project {
-
-    constructor(name, description, tasks){
-        this.name = name;
-        this.description = description
-        this.tasks = tasks;
-    }
+  constructor(name, description, tasks) {
+    this.name = name;
+    this.description = description;
+    this.tasks = tasks;
+  }
 
   sayHello() {
- console.log('hello, my name is ' + this.name)
-    }
+    console.log("hello, my name is " + this.name);
+  }
 }
 
-let projects = []
+let projects = [];
 
-let avn = new project('dadas', 'testing project with class',['test'])
-projects.push(avn)
-let avn2 = new project('dadas2', 'testing project with class2',['task', 'task2'])
-projects.push(avn2)
-
-
-let objectJSON = [];
+let projectsJSON = [];
 
 export function createProject() {
+  let projectInputName = document.getElementById("name");
+  let projectInputDescription = document.getElementById("description");
+  let projectForm = document.getElementById("projects-form");
 
-    let projectInputName = document.getElementById('name');
-let projectInputDescription = document.getElementById('description');
-let projectForm = document.getElementById('projects-form')
+  let name = projectInputName.value;
+  let description = projectInputDescription.value;
+  let newProject = new project(name, description, []);
+  projects.push(newProject);
+  updateJSON(projects);
+  projectForm.reset();
+  console.log(projectsJSON);
 
-    let name = projectInputName.value
-    let description = projectInputDescription.value
-    let newProject = new project(name, description, [])
-    projects.push(newProject)
-    updateJSON(projects)
-    console.log(objectJSON)
-    projectForm.reset()
+  loadProjects();
 }
 
+export function loadProjects() {
+  let projectsList = document.getElementById("projects-list");
+  projectsList.innerHTML = "";
+
+  for (let i = 0; i < projects.length; i++) {
+    let li = document.createElement("li");
+    li.innerHTML = projects[i].name;
+    projectsList.appendChild(li);
+    console.log(projects[i].name);
+  }
+
+  for (let i = 0; i < projects.length; i++) {
+    console.log(
+      ` "the id of the project is " ${i} "and "  ${projects[i].name}`
+    );
+  }
+}
 
 const updateJSON = (projects) => {
-   objectJSON = JSON.stringify(projects)
+  projectsJSON = JSON.stringify(projects);
+};
 
-}
+updateJSON(projects);
 
-
-updateJSON(projects)
-
-console.log(objectJSON)
+console.log(projectsJSON);

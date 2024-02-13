@@ -4,29 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tasky</title>
-   
   </head>
 
   <body>
     <div id="global-container">
-        <div id="header">
-            <div class="logo">
-              <span class="material-symbols-outlined">
-                task_alt
-                </span>
-                <div>tasky</div>
-              </div>
-
-              <div class="searchbar">
-                    <div class="searchbar-content">
-                        <span class="material-symbols-outlined">
-                            search
-                            </span>
-                      <input id="searchbar-input" type="text" placeholder="Search Here">
-                    </div>
-              </div>
+      <div id="header">
+        <div class="logo">
+          <span class="material-symbols-outlined"> task_alt </span>
+          <div>tasky</div>
         </div>
-     
+
+        <div class="searchbar">
+          <div class="searchbar-content">
+            <span class="material-symbols-outlined"> search </span>
+            <input id="searchbar-input" type="text" placeholder="Search Here" />
+          </div>
+        </div>
+      </div>
 
       <div id="content">
         <div id="sidebar">
@@ -48,17 +42,7 @@
           </div>
           <div class="sidebar-title">Your Projects</div>
           <div class="sidebar-projects">
-            <ul class="options-list">
-              <li>Created List 1</li>
-              <li>Created List 2</li>
-              <li>Created List 3</li>
-              <li>Created List 1</li>
-              <li>Created List 2</li>
-              <li>Created List 3</li>
-              <li>Created List 1</li>
-              <li>Created List 2</li>
-              <li>Created List 3</li>
-            </ul>
+            <ul class="options-list" id="projects-list"></ul>
           </div>
         </div>
         <div class="list-content">
@@ -69,9 +53,9 @@
             <form id="projects-form" action="">
               <p>create project</p>
               name
-              <input id="name" type="text">
+              <input id="name" type="text" />
               description
-              <input id="description" type="text">
+              <input id="description" type="text" />
               <button id="create-project">create project</button>
             </form>
           </div>

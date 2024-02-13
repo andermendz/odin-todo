@@ -1,5 +1,6 @@
  import styles from './styles.css'
- import { createProject } from './project';
+ import { createProject, loadProjects  } from './project';
+
 //  import projects from './project.js'
 
 let createProjectButton = document.getElementById('create-project')
