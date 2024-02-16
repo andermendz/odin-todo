@@ -10,6 +10,3 @@ class project {
     }
 }
 
-let avn = new project('dadas', 'testing project with class')
-console.log(avn)
-avn.sayHello()
