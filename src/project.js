@@ -10,9 +10,18 @@ class project {
   }
 }
 
-let projects = [];
-
 let projectsJSON = [];
+let projects = [
+  {name: "Project 1", description: "This is project 1", tasks: ["Task 1.1", "Task 1.2"]},
+  {name: "Project 2", description: "This is project 2", tasks: ["Task 2.1", "Task 2.2"]},
+  {name: "Project 3", description: "This is project 3", tasks: ["Task 3.1", "Task 3.2"]},
+  {name: "Project 4", description: "This is project 4", tasks: ["Task 4.1", "Task 4.2"]},
+  {name: "Project 5", description: "This is project 5", tasks: ["Task 5.1", "Task 5.2"]},
+  {name: "Project 6", description: "This is project 6", tasks: ["Task 6.1", "Task 6.2"]}
+];
+updateJSON();
+loadProjects();
+
 
 export function createProject() {
   let projectInputName = document.getElementById("name");
@@ -37,9 +46,20 @@ export function loadProjects() {
 
   for (let i = 0; i < projects.length; i++) {
     let li = document.createElement("li");
+    let projectPageTitle = document.querySelector('.content-title')
+    let projectPageDescription = document.querySelector('.content-description')
+
+    //clicking on project
+    li.onclick = () => {
+      projectPageTitle.innerHTML = projects[i].name;
+      projectPageDescription.innerHTML = projects[i].description;
+      console.log(li.innerHTML)
+    }
     li.innerHTML = projects[i].name;
     projectsList.appendChild(li);
-    console.log(projects[i].name);
+    console.log(projects[i]);
+    console.log(projectsJSON)
+
   }
 
   for (let i = 0; i < projects.length; i++) {
@@ -47,11 +67,16 @@ export function loadProjects() {
       ` "the id of the project is " ${i} "and "  ${projects[i].name}`
     );
   }
+
+  // add functionality to projects:
+
 }
 
-const updateJSON = (projects) => {
+function updateJSON (projects) {
   projectsJSON = JSON.stringify(projects);
 };
+
+
 
 updateJSON(projects);
 
