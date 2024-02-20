@@ -46,14 +46,26 @@ export function loadProjects() {
 
   for (let i = 0; i < projects.length; i++) {
     let li = document.createElement("li");
-    let projectPageTitle = document.querySelector('.content-title')
-    let projectPageDescription = document.querySelector('.content-description')
+    let projectPageTitle = document.querySelector('.project-title')
+    let projectPageDescription = document.querySelector('.project-description')
+    let projectPageTasks = document.querySelector('.project-tasks')
 
     //clicking on project
     li.onclick = () => {
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
+      projectPageTasks.innerHTML = "";
+      
       console.log(li.innerHTML)
+
+      for (let j = 0; j < projects[i].tasks.length; j++){
+        
+        let div = document.createElement("div")
+        div.innerHTML = projects[i].tasks[j];
+        projectPageTasks.appendChild(div);
+
+        console.log(projects[i].tasks[j])
+      }
     }
     li.innerHTML = projects[i].name;
     projectsList.appendChild(li);
