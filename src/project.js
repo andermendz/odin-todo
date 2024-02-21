@@ -81,10 +81,38 @@ export function loadProjects() {
 
       console.log(li.innerHTML);
 
+       // TASK INPUT 
+       let taskInputSection = document.createElement("div")
+      taskInputSection.classList.add("newtask-inputsection")
+       taskInputSection.innerHTML = ` <input class="newtask-input" type="text">
+       <div class="save-newtask">   <span class="material-symbols-outlined">
+       save
+       </span></div>
+    
+       `;
+
+
+   
+      
+       
+      //TASK ADDING
+      let taskAdd = document.createElement("div");
+      taskAdd.innerHTML = `    <div class = "add-task"> <span class="material-symbols-outlined">
+      add
+      </span></div>`;
+
+      projectPageTasks.appendChild(taskAdd)
+      projectPageTasks.appendChild(taskInputSection);
+      taskAdd.onclick = () =>  {
+
+      }
+     
+      
       // TASKS STRUCTURE
       for (let j = 0; j < projects[i].tasks.length; j++) {
         let div = document.createElement("div");
         div.innerHTML = `
+    
         <div class="task-content">
         <div class="task-text">${projects[i].tasks[j]}</div>
         <div class= " task-options">
