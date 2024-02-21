@@ -1,3 +1,5 @@
+import { createTask } from "./tasks";
+
 class project {
   constructor(name, description, tasks) {
     this.name = name;
@@ -68,47 +70,59 @@ export function loadProjects() {
   projectsList.innerHTML = "";
 
   for (let i = 0; i < projects.length; i++) {
-    let li = document.createElement("li");
-    let projectPageTitle = document.querySelector(".project-title");
-    let projectPageDescription = document.querySelector(".project-description");
-    let projectPageTasks = document.querySelector(".project-tasks");
-
-    //clicking on project
-    li.onclick = () => {
+    function loadSelectedProject() {
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
       projectPageTasks.innerHTML = "";
 
       console.log(li.innerHTML);
 
-       // TASK INPUT 
-       let taskInputSection = document.createElement("div")
-      taskInputSection.classList.add("newtask-inputsection")
-       taskInputSection.innerHTML = ` <input class="newtask-input" type="text">
+      // TASK INPUT
+      let taskInputSection = document.createElement("div");
+      taskInputSection.classList.add("newtask-inputsection");
+      taskInputSection.innerHTML = ` <input class="newtask-input" type="text">
        <div class="save-newtask">   <span class="material-symbols-outlined">
        save
        </span></div>
     
        `;
 
-
-   
-      
-       
       //TASK ADDING
       let taskAdd = document.createElement("div");
+
       taskAdd.innerHTML = `    <div class = "add-task"> <span class="material-symbols-outlined">
       add
       </span></div>`;
 
-      projectPageTasks.appendChild(taskAdd)
+      projectPageTasks.appendChild(taskAdd);
       projectPageTasks.appendChild(taskInputSection);
-      taskAdd.onclick = () =>  {
+      let newTaskInput = document.querySelector(".newtask-input");
+      let saveNewTaskButton = document.querySelector(".save-newtask");
 
-      }
-     
-      
+      newTaskInput.oninput = function () {
+        if (newTaskInput.value.length > 0) {
+          console.log("Task Name" + newTaskInput.value);
+          saveNewTaskButton.style.display = "flex";
+
+        } else {
+          console.log("No Task Name");
+          saveNewTaskButton.style.display = "none";
+         
+        }
+      };
+      taskAdd.onclick = () => {
+       
+      };
+
+      saveNewTaskButton.onclick = () => {
+        console.log(newTaskInput.value)
+        let newTask = createTask(newTaskInput.value);
+        projects[i].tasks.push(newTaskInput.value);
+        loadSelectedProject()
+      };
+
       // TASKS STRUCTURE
+      console.log(projects[i].tasks);
       for (let j = 0; j < projects[i].tasks.length; j++) {
         let div = document.createElement("div");
         div.innerHTML = `
@@ -129,7 +143,17 @@ delete
 
         console.log(projects[i].tasks[j]);
       }
+    }
+    let li = document.createElement("li");
+    let projectPageTitle = document.querySelector(".project-title");
+    let projectPageDescription = document.querySelector(".project-description");
+    let projectPageTasks = document.querySelector(".project-tasks");
+
+    //clicking on project
+    li.onclick = () => {
+      loadSelectedProject();
     };
+
     li.innerHTML = projects[i].name;
     projectsList.appendChild(li);
     console.log(projects[i]);

@@ -1,12 +1,13 @@
-class project {
-  constructor(name, description, priority, date) {
+class task {
+  constructor(name, status) {
     this.name = name;
-    this.description = description;
-    this.priority = priority;
-    this.date = date;
+
+    this.status = status;
   }
 
   sayHello() {
     console.log("hello, my name is " + this.name);
   }
 }
+
+export function createTask(name, status) {}

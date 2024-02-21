@@ -76,7 +76,8 @@ li {
   justify-content: space-around;
 
   height: 3rem;
-  width: 24rem;
+  width: 90%;
+  max-width: 24rem;
   transition: all 0.2s ease-in-out;
 }
 
@@ -220,61 +221,64 @@ li {
   height: 4rem;
 }
 
-.add-task{
+.add-task {
   display: flex;
   align-items: center;
   justify-content: center;
 
   border-radius: 1rem;
- padding: 1rem;
- width: 3rem;
- 
+  padding: 1rem;
+  width: 3rem;
+
   background-color: var(--base-color);
   transition: all 0.4s ease-in;
 }
 
-.add-task> .material-symbols-outlined{
+.add-task > .material-symbols-outlined {
   font-size: 2rem;
 }
-.add-task{
+.add-task {
   cursor: pointer;
 }
 
-.newtask-inputsection{
+.newtask-inputsection {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
-.newtask-input{
+.newtask-input {
   width: 100%;
+
   height: 3rem;
   font-size: 1.2rem;
- padding-left: 1rem;
+  padding-left: 1rem;
   border-radius: 1rem;
   border: 0.15rem solid var(--secondary-color);
   outline: none;
+  transition: all 0.4s ease-in;
 }
 
-.save-newtask{
+.save-newtask {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 3rem;
 
+  width: 6rem;
   border-radius: 1rem;
 
-  padding: 1rem;
- 
   background-color: var(--base-color);
   transition: all 0.4s ease-in;
 }
 
-.save-newtask > .material-symbols-outlined{
+.save-newtask > .material-symbols-outlined {
   font-size: 2rem;
 }
+
 .task-text {
- 
 }
+
 .task-options {
   display: flex;
   gap: 1rem;
@@ -284,20 +288,20 @@ li {
   background-color: var(--secondary-color);
   transition: all 0.4s ease-in;
 }
+
 .task-options > input {
 }
 
 .task-options > .material-symbols-outlined {
   font-size: 1.8rem;
   padding: 0.5rem;
+  border-radius: 1rem;
   cursor: pointer;
   transition: all 0.4s ease-in;
 }
 
 .task-options > .material-symbols-outlined:hover {
-  color: #ff0000;
-  transform: scale(1.05);
+  transform: scale(1.02);
   border-radius: 1rem;
-  background-color: var(--base-color);
-  padding: 0.1rem;
+  background-color: #ffdfdf;
 }
