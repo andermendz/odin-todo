@@ -184,15 +184,24 @@ li {
   grid-template-columns: 20rem 1fr;
 }
 
-.project-details {
-  max-width: 40rem;
-  width: 90%;
+.project-content{
   display: flex;
   flex-flow: column;
+
+  max-width: 40rem;
+  width: 90%;
   padding: 1rem;
-  gap: 1rem;
-  background-color: var(--secondary-color);
+  gap: 2rem;
+  
   border-radius: 1rem;
+}
+
+.project-details {
+ 
+  background-color: var(--secondary-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 .project-title {
@@ -202,7 +211,7 @@ li {
 
 .project-tasks {
   max-width: 40rem;
-  width: 90%;
+  padding: 1rem;
   display: flex;
   flex-flow: column;
   padding: 1rem;

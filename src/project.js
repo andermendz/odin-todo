@@ -71,12 +71,20 @@ export function loadProjects() {
 
   for (let i = 0; i < projects.length; i++) {
     function loadSelectedProject() {
+
+      // HOME MENU
+
+      let homeMenu = document.querySelector(".home-menu")
+      let projectContentPage = document.querySelector(".project-content")
+      homeMenu.onclick = () => {
+        projectContentPage.style.display = "none";
+      }
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
       projectPageTasks.innerHTML = "";
 
       console.log(li.innerHTML);
-
+   
       // TASK INPUT
       let taskInputSection = document.createElement("div");
       taskInputSection.classList.add("newtask-inputsection");
@@ -143,7 +151,10 @@ delete
 
         console.log(projects[i].tasks[j]);
       }
+
+      projectContentPage.style.display = "flex";
     }
+
     let li = document.createElement("li");
     let projectPageTitle = document.querySelector(".project-title");
     let projectPageDescription = document.querySelector(".project-description");
