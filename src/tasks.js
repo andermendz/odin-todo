@@ -1,7 +1,6 @@
 class task {
   constructor(name, status) {
     this.name = name;
-
     this.status = status;
   }
 
@@ -10,4 +9,9 @@ class task {
   }
 }
 
-export function createTask(name, status) {}
+export function createTask(name, status) {
+  
+  let newTaskObject = new task(name, status)
+  
+  return newTaskObject;
+}

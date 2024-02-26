@@ -15,36 +15,42 @@ class project {
 let projectsJSON = [];
 let projects = [
   {
-    name: "Project 1",
-    description: "This is project 1",
-    tasks: ["Task 1.1", "Task 1.2"],
+    "name": "Project 1",
+    "description": "This is project 1",
+    "tasks": [
+
+
+    ],
   },
   {
-    name: "Project 2",
-    description: "This is project 2",
-    tasks: ["Task 2.1", "Task 2.2"],
+    "name": "Project 2",
+    "description": "This is project 2",
+    "tasks": [
+
+
+    ],
   },
   {
-    name: "Project 3",
-    description: "This is project 3",
-    tasks: ["Task 3.1", "Task 3.2"],
+    "name": "Project 3",
+    "description": "This is project 3",
+    "tasks": [
+
+
+    ],
   },
-  {
-    name: "Project 4",
-    description: "This is project 4",
-    tasks: ["Task 4.1", "Task 4.2"],
-  },
-  {
-    name: "Project 5",
-    description: "This is project 5",
-    tasks: ["Task 5.1", "Task 5.2"],
-  },
-  {
-    name: "Project 6",
-    description: "This is project 6",
-    tasks: ["Task 6.1", "Task 6.2"],
-  },
-];
+]
+
+
+function taskFactory() {
+  for (let i = 0; i < projects.length; i++) {
+    for (let j = 1; j <= 5; j++) {
+      let newTaskObject = createTask(`Task ${i + 1}.${j}`, 'incomplete')
+      projects[i].tasks.push(newTaskObject);
+    }
+  }
+}
+
+taskFactory()
 updateJSON();
 loadProjects();
 
@@ -59,6 +65,7 @@ export function createProject() {
   projects.push(newProject);
   updateJSON(projects);
   projectForm.reset();
+
   console.log(projectsJSON);
 
   loadProjects();
@@ -84,7 +91,7 @@ export function loadProjects() {
       projectPageTasks.innerHTML = "";
 
       console.log(li.innerHTML);
-   
+
       // TASK INPUT
       let taskInputSection = document.createElement("div");
       taskInputSection.classList.add("newtask-inputsection");
@@ -106,6 +113,7 @@ export function loadProjects() {
       projectPageTasks.appendChild(taskInputSection);
       let newTaskInput = document.querySelector(".newtask-input");
       let saveNewTaskButton = document.querySelector(".save-newtask");
+      saveNewTaskButton.style.display = 'none';
 
       newTaskInput.oninput = function () {
         if (newTaskInput.value.length > 0) {
@@ -115,18 +123,22 @@ export function loadProjects() {
         } else {
           console.log("No Task Name");
           saveNewTaskButton.style.display = "none";
-         
+
         }
       };
+
       taskAdd.onclick = () => {
-       
+
       };
 
+      // TASK ADDING TO PROJECT
       saveNewTaskButton.onclick = () => {
         console.log(newTaskInput.value)
-        let newTask = createTask(newTaskInput.value);
-        projects[i].tasks.push(newTaskInput.value);
+        let newTaskObject = createTask(newTaskInput.value, 'incomplete')
+        projects[i].tasks.push(newTaskObject);
+
         loadSelectedProject()
+        console.log(projects)
       };
 
       // TASKS STRUCTURE
@@ -136,7 +148,7 @@ export function loadProjects() {
         div.innerHTML = `
     
         <div class="task-content">
-        <div class="task-text">${projects[i].tasks[j]}</div>
+        <div class="task-text">${projects[i].tasks[j].name}</div>
         <div class= " task-options">
         <input type="checkbox">
         <span class="material-symbols-outlined">
