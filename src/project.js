@@ -12,6 +12,7 @@ class project {
   }
 }
 
+// TODO: ADD LOCAL STORAGE API
 let projectsJSON = [];
 let projects = [
   {
