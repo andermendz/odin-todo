@@ -12,16 +12,39 @@ class project {
   }
 }
 
-// TODO: ADD LOCAL STORAGE API with retrieving
+// TODO: ADD LOCAL STORAGE API
 let projectsJSON = [];
-let projects = [
+let projects = localStorage.getItem("test") ? localStorage.setItem("test") : [
+  {
+    "name": "Project 1",
+    "description": "This is project 1",
+    "tasks": [
 
-]
+
+    ],
+  },
+  {
+    "name": "Project 2",
+    "description": "This is project 2",
+    "tasks": [
+
+
+    ],
+  },
+  {
+    "name": "Project 3",
+    "description": "This is project 3",
+    "tasks": [
+
+
+    ],
+  },
+];
 
 
 function taskFactory() {
   for (let i = 0; i < projects.length; i++) {
-    for (let j = 1; j <= 3; j++) {
+    for (let j = 1; j <= 5; j++) {
       let newTaskObject = createTask(`Task ${i + 1}.${j}`, 'incomplete')
       projects[i].tasks.push(newTaskObject);
     }
