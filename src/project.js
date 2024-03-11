@@ -38,8 +38,7 @@ export function createProject() {
   projects.push(newProject);
 
   projectForm.reset();
-
-
+  localStorage.setItem("projectsJSON", JSON.stringify(projects));
   loadProjects();
 }
 
