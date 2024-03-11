@@ -110,11 +110,13 @@ export function loadProjects() {
         projects[i].tasks.push(newTaskObject);
 
         loadSelectedProject()
+        localStorage.setItem("projectsJSON", JSON.stringify(projects));
         console.log(projects)
+        console.log(localStorage.getItem("projectsJSON"))
       };
 
       // TASKS STRUCTURE
-      console.log(projects[i].tasks);
+
       for (let j = 0; j < projects[i].tasks.length; j++) {
         let div = document.createElement("div");
         div.innerHTML = `
