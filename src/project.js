@@ -13,48 +13,19 @@ class project {
 }
 
 // TODO: ADD LOCAL STORAGE API with retrieving
-let projectsJSON = [];
-let projects = [
-  {
-    "name": "Project 1",
-    "description": "This is project 1",
-    "tasks": [
 
-
-    ],
-  },
-  {
-    "name": "Project 2",
-    "description": "This is project 2",
-    "tasks": [
-
-
-    ],
-  },
-  {
-    "name": "Project 3",
-    "description": "This is project 3",
-    "tasks": [
-
-
-    ],
-  },
-];
+let projects = localStorage.getItem("projectsJSON") ? JSON.parse(localStorage.getItem("projectsJSON")) : [] ;
 
 
 
-function taskFactory() {
-  for (let i = 0; i < projects.length; i++) {
-    for (let j = 1; j <= 3; j++) {
-      let newTaskObject = createTask(`Task ${i + 1}.${j}`, 'incomplete')
-      projects[i].tasks.push(newTaskObject);
-    }
-  }
-}
 
-taskFactory()
-updateJSON();
+
+
+
+
 loadProjects();
+
+
 
 export function createProject() {
   let projectInputName = document.getElementById("name");
@@ -65,10 +36,9 @@ export function createProject() {
   let description = projectInputDescription.value;
   let newProject = new project(name, description, []);
   projects.push(newProject);
-  updateJSON(projects);
+
   projectForm.reset();
 
-  console.log(projectsJSON);
 
   loadProjects();
 }
@@ -182,7 +152,7 @@ delete
     li.innerHTML = projects[i].name;
     projectsList.appendChild(li);
     console.log(projects[i]);
-    console.log(projectsJSON);
+   
   }
 
   for (let i = 0; i < projects.length; i++) {
@@ -194,10 +164,4 @@ delete
   // add functionality to projects:
 }
 
-function updateJSON(projects) {
-  projectsJSON = JSON.stringify(projects);
-}
 
-updateJSON(projects);
-
-console.log(projectsJSON);
