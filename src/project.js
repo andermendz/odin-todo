@@ -12,20 +12,9 @@ class project {
   }
 }
 
-// TODO: ADD LOCAL STORAGE API with retrieving
-
 let projects = localStorage.getItem("projectsJSON") ? JSON.parse(localStorage.getItem("projectsJSON")) : [] ;
 
-
-
-
-
-
-
-
 loadProjects();
-
-
 
 export function createProject() {
   let projectInputName = document.getElementById("name");
@@ -42,7 +31,7 @@ export function createProject() {
   loadProjects();
 }
 
-// TO-DO: use JSON instead of projects array
+// TO-DO: add removing, editing functionality on projects and tasks
 export function loadProjects() {
   let projectsList = document.getElementById("projects-list");
   projectsList.innerHTML = "";
