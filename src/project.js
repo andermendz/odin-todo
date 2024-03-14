@@ -12,8 +12,47 @@ class project {
   }
 }
 
-let projects = localStorage.getItem("projectsJSON") ? JSON.parse(localStorage.getItem("projectsJSON")) : [] ;
+// TODO: ADD LOCAL STORAGE API
+let projectsJSON = [];
+let projects = localStorage.getItem("test") ? localStorage.setItem("test") : [
+  {
+    "name": "Project 1",
+    "description": "This is project 1",
+    "tasks": [
 
+
+    ],
+  },
+  {
+    "name": "Project 2",
+    "description": "This is project 2",
+    "tasks": [
+
+
+    ],
+  },
+  {
+    "name": "Project 3",
+    "description": "This is project 3",
+    "tasks": [
+
+
+    ],
+  },
+];
+
+
+function taskFactory() {
+  for (let i = 0; i < projects.length; i++) {
+    for (let j = 1; j <= 5; j++) {
+      let newTaskObject = createTask(`Task ${i + 1}.${j}`, 'incomplete')
+      projects[i].tasks.push(newTaskObject);
+    }
+  }
+}
+
+taskFactory()
+updateJSON();
 loadProjects();
 
 export function createProject() {
@@ -25,13 +64,15 @@ export function createProject() {
   let description = projectInputDescription.value;
   let newProject = new project(name, description, []);
   projects.push(newProject);
-
+  updateJSON(projects);
   projectForm.reset();
-  localStorage.setItem("projectsJSON", JSON.stringify(projects));
+
+  console.log(projectsJSON);
+
   loadProjects();
 }
 
-// TO-DO: add removing, editing functionality on projects and tasks
+// PROJECTS LOADING 
 export function loadProjects() {
   let projectsList = document.getElementById("projects-list");
   projectsList.innerHTML = "";
@@ -98,13 +139,12 @@ export function loadProjects() {
         projects[i].tasks.push(newTaskObject);
 
         loadSelectedProject()
-        localStorage.setItem("projectsJSON", JSON.stringify(projects));
         console.log(projects)
-        console.log(localStorage.getItem("projectsJSON"))
       };
 
       // TASKS STRUCTURE
-
+      console.log(projects[i].tasks);
+      // PROJECT TASK LOADING
       for (let j = 0; j < projects[i].tasks.length; j++) {
         let div = document.createElement("div");
         div.innerHTML = `
@@ -113,7 +153,7 @@ export function loadProjects() {
         <div class="task-text">${projects[i].tasks[j].name}</div>
         <div class= " task-options">
         <input type="checkbox">
-        <span class="material-symbols-outlined">
+        <span class="material-symbols-outlined delete-task">
 delete
 </span>
         </div>
@@ -121,9 +161,17 @@ delete
       
        `;
 
+       // DELETE TASK
         projectPageTasks.appendChild(div);
-
-        console.log(projects[i].tasks[j]);
+        let deleteTaskButton = document.querySelectorAll('.delete-task')
+        deleteTaskButton.forEach((task)=> {
+          task.onclick = () => {
+            console.log(projects[i].tasks[j])
+          }
+        
+        })
+      
+     
       }
 
       projectContentPage.style.display = "flex";
@@ -142,7 +190,7 @@ delete
     li.innerHTML = projects[i].name;
     projectsList.appendChild(li);
     console.log(projects[i]);
-   
+    console.log(projectsJSON);
   }
 
   for (let i = 0; i < projects.length; i++) {
@@ -154,4 +202,10 @@ delete
   // add functionality to projects:
 }
 
+function updateJSON(projects) {
+  projectsJSON = JSON.stringify(projects);
+}
 
+updateJSON(projects);
+
+console.log(projectsJSON);
