@@ -162,16 +162,16 @@ delete
        `;
 
        // DELETE TASK
-        projectPageTasks.appendChild(div);
-        let deleteTaskButton = document.querySelectorAll('.delete-task')
-        deleteTaskButton.forEach((task)=> {
-          task.onclick = () => {
-            console.log(projects[i].tasks[j])
-          }
+
+        let deleteTaskButton = div.querySelector('.delete-task')
+        deleteTaskButton.onclick = () => {
+          projects[i].tasks.splice(j, 1)
+          console.log(projects[i].tasks)
+      };
         
-        })
+
       
-     
+        projectPageTasks.appendChild(div);
       }
 
       projectContentPage.style.display = "flex";
