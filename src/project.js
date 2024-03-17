@@ -12,7 +12,7 @@ class project {
   }
 }
 
-// TODO: ADD LOCAL STORAGE API
+// TODO: DELETE AND EDIT FUNCTION?
 let projectsJSON = [];
 let projects = localStorage.getItem("test") ? localStorage.setItem("test") : [
   {
