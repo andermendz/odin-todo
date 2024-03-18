@@ -12,7 +12,7 @@ class project {
   }
 }
 
-// TODO: CHANGE STATUS OF TASK / DONE - UNDONE
+// TODO: CHANGE STATUS OF TASK / DONE - UNDONE  and DELETE PROJECTS, CHANGE NAME,ETC.
 let projects = localStorage.getItem("projectsStorage") ? JSON.parse(localStorage.getItem("projectsStorage")) : [] ; 
 
 
