@@ -12,7 +12,7 @@ class project {
   }
 }
 
-// TODO: DELETE AND EDIT FUNCTION?
+// TODO: CHANGE STATUS OF TASK / DONE - UNDONE
 let projects = localStorage.getItem("projectsStorage") ? JSON.parse(localStorage.getItem("projectsStorage")) : [] ; 
 
 
