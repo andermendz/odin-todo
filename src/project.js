@@ -13,46 +13,10 @@ class project {
 }
 
 // TODO: DELETE AND EDIT FUNCTION?
-let projectsJSON = [];
-let projects = localStorage.getItem("test") ? localStorage.setItem("test") : [
-  {
-    "name": "Project 1",
-    "description": "This is project 1",
-    "tasks": [
+let projects = localStorage.getItem("projectsStorage") ? JSON.parse(localStorage.getItem("projectsStorage")) : [] ; 
 
 
-    ],
-  },
-  {
-    "name": "Project 2",
-    "description": "This is project 2",
-    "tasks": [
 
-
-    ],
-  },
-  {
-    "name": "Project 3",
-    "description": "This is project 3",
-    "tasks": [
-
-
-    ],
-  },
-];
-
-
-function taskFactory() {
-  for (let i = 0; i < projects.length; i++) {
-    for (let j = 1; j <= 5; j++) {
-      let newTaskObject = createTask(`Task ${i + 1}.${j}`, 'incomplete')
-      projects[i].tasks.push(newTaskObject);
-    }
-  }
-}
-
-taskFactory()
-updateJSON();
 loadProjects();
 
 export function createProject() {
@@ -64,10 +28,12 @@ export function createProject() {
   let description = projectInputDescription.value;
   let newProject = new project(name, description, []);
   projects.push(newProject);
-  updateJSON(projects);
+  localStorage.setItem("projectsStorage", JSON.stringify(projects))
+  console.log(JSON.stringify(projects))
+  
   projectForm.reset();
 
-  console.log(projectsJSON);
+
 
   loadProjects();
 }
@@ -138,6 +104,7 @@ export function loadProjects() {
         let newTaskObject = createTask(newTaskInput.value, 'incomplete')
         projects[i].tasks.push(newTaskObject);
 
+        localStorage.setItem("projectsStorage", JSON.stringify(projects))
         loadSelectedProject()
         console.log(projects)
       };
@@ -167,6 +134,8 @@ delete
         deleteTaskButton.onclick = () => {
           projects[i].tasks.splice(j, 1)
           console.log(projects[i].tasks)
+          localStorage.setItem("projectsStorage", JSON.stringify(projects))
+          loadSelectedProject();
       };
         
 
@@ -190,7 +159,7 @@ delete
     li.innerHTML = projects[i].name;
     projectsList.appendChild(li);
     console.log(projects[i]);
-    console.log(projectsJSON);
+ 
   }
 
   for (let i = 0; i < projects.length; i++) {
@@ -202,10 +171,7 @@ delete
   // add functionality to projects:
 }
 
-function updateJSON(projects) {
-  projectsJSON = JSON.stringify(projects);
-}
 
-updateJSON(projects);
 
-console.log(projectsJSON);
+
+
