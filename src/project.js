@@ -13,9 +13,9 @@ class project {
 }
 
 // TODO: CHANGE STATUS OF TASK / DONE - UNDONE  and DELETE PROJECTS, CHANGE NAME,ETC.
-let projects = localStorage.getItem("projectsStorage") ? JSON.parse(localStorage.getItem("projectsStorage")) : [] ; 
-
-
+let projects = localStorage.getItem("projectsStorage")
+  ? JSON.parse(localStorage.getItem("projectsStorage"))
+  : [];
 
 loadProjects();
 
@@ -28,31 +28,28 @@ export function createProject() {
   let description = projectInputDescription.value;
   let newProject = new project(name, description, []);
   projects.push(newProject);
-  localStorage.setItem("projectsStorage", JSON.stringify(projects))
-  console.log(JSON.stringify(projects))
-  
+  localStorage.setItem("projectsStorage", JSON.stringify(projects));
+  console.log(JSON.stringify(projects));
+
   projectForm.reset();
-
-
 
   loadProjects();
 }
 
-// PROJECTS LOADING 
+// PROJECTS LOADING
 export function loadProjects() {
   let projectsList = document.getElementById("projects-list");
   projectsList.innerHTML = "";
 
   for (let i = 0; i < projects.length; i++) {
     function loadSelectedProject() {
-
       // HOME MENU
 
-      let homeMenu = document.querySelector(".home-menu")
-      let projectContentPage = document.querySelector(".project-content")
+      let homeMenu = document.querySelector(".home-menu");
+      let projectContentPage = document.querySelector(".project-content");
       homeMenu.onclick = () => {
         projectContentPage.style.display = "none";
-      }
+      };
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
       projectPageTasks.innerHTML = "";
@@ -80,33 +77,29 @@ export function loadProjects() {
       projectPageTasks.appendChild(taskInputSection);
       let newTaskInput = document.querySelector(".newtask-input");
       let saveNewTaskButton = document.querySelector(".save-newtask");
-      saveNewTaskButton.style.display = 'none';
+      saveNewTaskButton.style.display = "none";
 
       newTaskInput.oninput = function () {
         if (newTaskInput.value.length > 0) {
           console.log("Task Name" + newTaskInput.value);
           saveNewTaskButton.style.display = "flex";
-
         } else {
           console.log("No Task Name");
           saveNewTaskButton.style.display = "none";
-
         }
       };
 
-      taskAdd.onclick = () => {
-
-      };
+      taskAdd.onclick = () => {};
 
       // TASK ADDING TO PROJECT
       saveNewTaskButton.onclick = () => {
-        console.log(newTaskInput.value)
-        let newTaskObject = createTask(newTaskInput.value, 'incomplete')
+        console.log(newTaskInput.value);
+        let newTaskObject = createTask(newTaskInput.value, "incomplete");
         projects[i].tasks.push(newTaskObject);
 
-        localStorage.setItem("projectsStorage", JSON.stringify(projects))
-        loadSelectedProject()
-        console.log(projects)
+        localStorage.setItem("projectsStorage", JSON.stringify(projects));
+        loadSelectedProject();
+        console.log(projects);
       };
 
       // TASKS STRUCTURE
@@ -128,18 +121,16 @@ delete
       
        `;
 
-       // DELETE TASK
+        // DELETE TASK
 
-        let deleteTaskButton = div.querySelector('.delete-task')
+        let deleteTaskButton = div.querySelector(".delete-task");
         deleteTaskButton.onclick = () => {
-          projects[i].tasks.splice(j, 1)
-          console.log(projects[i].tasks)
-          localStorage.setItem("projectsStorage", JSON.stringify(projects))
+          projects[i].tasks.splice(j, 1);
+          console.log(projects[i].tasks);
+          localStorage.setItem("projectsStorage", JSON.stringify(projects));
           loadSelectedProject();
-      };
-        
+        };
 
-      
         projectPageTasks.appendChild(div);
       }
 
@@ -159,7 +150,6 @@ delete
     li.innerHTML = projects[i].name;
     projectsList.appendChild(li);
     console.log(projects[i]);
- 
   }
 
   for (let i = 0; i < projects.length; i++) {
@@ -167,11 +157,4 @@ delete
       ` "the id of the project is " ${i} "and "  ${projects[i].name}`
     );
   }
-
-  // add functionality to projects:
 }
-
-
-
-
-

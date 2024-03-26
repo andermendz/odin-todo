@@ -185,7 +185,7 @@ li {
   grid-template-columns: 20rem 1fr;
 }
 
-.project-content{
+.project-content {
   display: flex;
   flex-flow: column;
 
@@ -193,12 +193,11 @@ li {
   width: 90%;
   padding: 1rem;
   gap: 2rem;
-  
+
   border-radius: 1rem;
 }
 
 .project-details {
- 
   background-color: var(--secondary-color);
   padding: 1rem;
   border-radius: 1rem;
