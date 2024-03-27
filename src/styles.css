@@ -293,7 +293,6 @@ li {
   display: flex;
   gap: 1rem;
   border-radius: 1rem;
-
   padding: 0.3rem;
   padding-inline: 0.6rem;
   background-color: var(--secondary-color);
