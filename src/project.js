@@ -12,7 +12,7 @@ class project {
   }
 }
 
-// TODO: CHANGE STATUS OF TASK / DONE - UNDONE  and DELETE PROJECTS, CHANGE NAME,ETC.
+// TODO: CHANGE STATUS OF TASK / DONE - UNDONE  and DELETE PROJECTS, CHANGE NAME,ETC. // REFACTORIZE CODE
 let projects = localStorage.getItem("projectsStorage")
   ? JSON.parse(localStorage.getItem("projectsStorage"))
   : [];
@@ -43,13 +43,16 @@ export function loadProjects() {
 
   for (let i = 0; i < projects.length; i++) {
     function loadSelectedProject() {
-      // HOME MENU
 
+
+      // HOME MENU
       let homeMenu = document.querySelector(".home-menu");
+
       let projectContentPage = document.querySelector(".project-content");
       homeMenu.onclick = () => {
         projectContentPage.style.display = "none";
       };
+   
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
       projectPageTasks.innerHTML = "";
@@ -59,7 +62,7 @@ export function loadProjects() {
       // TASK INPUT
       let taskInputSection = document.createElement("div");
       taskInputSection.classList.add("newtask-inputsection");
-      taskInputSection.innerHTML = ` <input class="newtask-input" type="text">
+      taskInputSection.innerHTML = ` <input id="newtask-input" type="text">
        <div class="save-newtask">   <span class="material-symbols-outlined">
        save
        </span></div>
@@ -75,7 +78,7 @@ export function loadProjects() {
 
       projectPageTasks.appendChild(taskAdd);
       projectPageTasks.appendChild(taskInputSection);
-      let newTaskInput = document.querySelector(".newtask-input");
+      let newTaskInput = document.getElementById("newtask-input");
       let saveNewTaskButton = document.querySelector(".save-newtask");
       saveNewTaskButton.style.display = "none";
 
@@ -137,10 +140,11 @@ delete
       projectContentPage.style.display = "flex";
     }
 
+    // TODO: optimize this with inner HTML instead of creating elements 
     let li = document.createElement("li");
-    let projectPageTitle = document.querySelector(".project-title");
+    let projectPageTitle = document.querySelector(".project-content-elements-title");
     let projectPageDescription = document.querySelector(".project-description");
-    let projectPageTasks = document.querySelector(".project-tasks");
+    let projectPageTasks = document.getElementById("project-tasks");
 
     //clicking on project
     li.onclick = () => {

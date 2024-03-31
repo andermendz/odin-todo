@@ -185,18 +185,6 @@ li {
   grid-template-columns: 20rem 1fr;
 }
 
-.project-content {
-  display: flex;
-  flex-flow: column;
-
-  max-width: 40rem;
-  width: 90%;
-  padding: 1rem;
-  gap: 2rem;
-
-  border-radius: 1rem;
-}
-
 .project-details {
   background-color: var(--secondary-color);
   padding: 1rem;
@@ -220,45 +208,65 @@ li {
   border-radius: 1rem;
 }
 
-.project-create {
+.project-content {
   display: flex;
-    max-width: 40rem;
- 
+  flex-flow: column;
 
-    flex-flow: column;
-    padding: 1rem;
-    gap: 1rem;
-    background-color: var(--secondary-color);
-    border-radius: 1rem;
+  max-width: 40rem;
+  width: 90%;
+  padding: 1rem;
+  gap: 2rem;
 
-  }
+  border-radius: 1rem;
+}
 
-  #create-project{
-    height: 3rem;
-    width: 6rem;
-    align-self: center;
-    background-color: var(--base-color);
-    border-radius: 0.6rem;
-    border: 0.15rem solid var(--secondary-color);
-    font-size: 1rem;
-  }
+.project-content-elements {
+  display: flex;
+  width: 90%;
 
-  .input {
-    width: 100%;
-  
-    height: 3rem;
-    font-size: 1.2rem;
-    
-    border-radius: 1rem;
-    border: 0.15rem solid var(--secondary-color);
-    outline: none;
-    transition: all 0.4s ease-in;
-  }
-.create-project-title{
+  flex-flow: column;
+  padding: 1rem;
+  gap: 1rem;
+  background-color: var(--secondary-color);
+  border-radius: 1rem;
+}
 
-    font-size: 2rem;
-    font-weight: 700;
- 
+#create-project {
+  align-self: center;
+  width: 80%;
+  height: 3rem;
+
+  background-color: var(--base-color);
+  border-radius: 0.6rem;
+  border: 0.15rem solid var(--secondary-color);
+  font-size: 1rem;
+}
+
+.creation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.projects-form-elements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.input {
+  padding-left: 1rem;
+  height: 3rem;
+  font-size: 1.2rem;
+  border-radius: 1rem;
+
+  border: 0.15rem solid var(--secondary-color);
+  outline: none;
+  transition: all 0.4s ease-in;
+}
+.project-content-elements-title {
+  margin-block: 1rem;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .task-content {
@@ -298,7 +306,8 @@ li {
   justify-content: space-between;
   gap: 1rem;
 }
-.newtask-input {
+
+#newtask-input {
   width: 100%;
 
   height: 3rem;
@@ -309,8 +318,6 @@ li {
   outline: none;
   transition: all 0.4s ease-in;
 }
-
-
 
 .save-newtask {
   display: flex;
