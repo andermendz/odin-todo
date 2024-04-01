@@ -61,7 +61,7 @@ export function loadProjects() {
 
       // TASK INPUT
       let taskInputSection = document.createElement("div");
-      taskInputSection.classList.add("newtask-inputsection");
+      taskInputSection.classList.add("newtask-input-container");
       taskInputSection.innerHTML = ` <input id="newtask-input" type="text">
        <div class="save-newtask">   <span class="material-symbols-outlined">
        save
@@ -140,7 +140,7 @@ delete
       projectContentPage.style.display = "flex";
     }
 
-    // TODO: optimize this with inner HTML instead of creating elements 
+    // TODO: reduce redundance
     let li = document.createElement("li");
     let projectPageTitle = document.querySelector(".project-content-elements-title");
     let projectPageDescription = document.querySelector(".project-description");
