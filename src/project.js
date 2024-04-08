@@ -35,6 +35,11 @@ export function createProject() {
 
   loadProjects();
 }
+// TODO:  INSTEAD OF DISPLAY NONE, CONVERT AÑL THE ELEMENTS IN COMPONENTS
+//MAIN ELEMENTS
+let homeMenu = document.querySelector(".home-menu");
+
+let projectContentPage = document.querySelector(".project-content");
 
 // PROJECTS LOADING
 export function loadProjects() {
@@ -46,9 +51,7 @@ export function loadProjects() {
 
 
       // HOME MENU
-      let homeMenu = document.querySelector(".home-menu");
 
-      let projectContentPage = document.querySelector(".project-content");
       homeMenu.onclick = () => {
         projectContentPage.style.display = "none";
       };
