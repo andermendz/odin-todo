@@ -48,14 +48,30 @@ export function loadProjects() {
 
   for (let i = 0; i < projects.length; i++) {
     function loadSelectedProject() {
+      let projectContent = document.querySelector(".project-content")
 
+    function cleanProjectInfo () {
+      projectContent.innerHTML = "";
+    }
+    cleanProjectInfo()
 
+     
+    projectContent.innerHTML = `   <div class="project-content-elements">
+    <div class="project-content-elements-title"></div>
+    <div class="project-description"></div>
+  </div>
+  <div class="project-content-elements" id="project-tasks"></div>
+`;
       // HOME MENU
 
       homeMenu.onclick = () => {
-        projectContentPage.style.display = "none";
+        cleanProjectInfo()
       };
    
+      let projectPageTitle = projectContent.querySelector(".project-content-elements-title");
+      let projectPageDescription = projectContent.querySelector(".project-description");
+      let projectPageTasks = projectContent.querySelector("#project-tasks");
+
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
       projectPageTasks.innerHTML = "";
@@ -145,9 +161,7 @@ delete
 
     // TODO: reduce redundance
     let li = document.createElement("li");
-    let projectPageTitle = document.querySelector(".project-content-elements-title");
-    let projectPageDescription = document.querySelector(".project-description");
-    let projectPageTasks = document.getElementById("project-tasks");
+
 
     //clicking on project
     li.onclick = () => {
