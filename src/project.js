@@ -1,5 +1,6 @@
 import { createTask } from "./tasks";
 
+// PROJECT OBJECT DECLARED
 class project {
   constructor(name, description, tasks) {
     this.name = name;
@@ -35,10 +36,11 @@ export function createProject() {
 
   loadProjects();
 }
-// TODO:  INSTEAD OF DISPLAY NONE, CONVERT AÑL THE ELEMENTS IN COMPONENTS
+
 //MAIN ELEMENTS
 let homeMenu = document.querySelector(".home-menu");
 
+let projectCreateSection = document.querySelector(".project-create")
 let projectContentPage = document.querySelector(".project-content");
 
 // PROJECTS LOADING
@@ -48,15 +50,15 @@ export function loadProjects() {
 
   for (let i = 0; i < projects.length; i++) {
     function loadSelectedProject() {
-      let projectContent = document.querySelector(".project-content")
+      let projectContent = document.querySelector(".project-content");
+      projectCreateSection.style.display = "none";
+      function cleanProjectInfo() {
+        projectContent.innerHTML = "";
+      }
 
-    function cleanProjectInfo () {
-      projectContent.innerHTML = "";
-    }
-    cleanProjectInfo()
+      cleanProjectInfo();
 
-     
-    projectContent.innerHTML = `   <div class="project-content-elements">
+      projectContent.innerHTML = `   <div class="project-content-elements">
     <div class="project-content-elements-title"></div>
     <div class="project-description"></div>
   </div>
@@ -65,11 +67,16 @@ export function loadProjects() {
       // HOME MENU
 
       homeMenu.onclick = () => {
-        cleanProjectInfo()
+        projectCreateSection.style.display = "flex";
+        cleanProjectInfo();
       };
-   
-      let projectPageTitle = projectContent.querySelector(".project-content-elements-title");
-      let projectPageDescription = projectContent.querySelector(".project-description");
+
+      let projectPageTitle = projectContent.querySelector(
+        ".project-content-elements-title"
+      );
+      let projectPageDescription = projectContent.querySelector(
+        ".project-description"
+      );
       let projectPageTasks = projectContent.querySelector("#project-tasks");
 
       projectPageTitle.innerHTML = projects[i].name;
@@ -111,7 +118,7 @@ export function loadProjects() {
         }
       };
 
-      taskAdd.onclick = () => {};
+      taskAdd.onclick = () => { };
 
       // TASK ADDING TO PROJECT
       saveNewTaskButton.onclick = () => {
@@ -161,7 +168,6 @@ delete
 
     // TODO: reduce redundance
     let li = document.createElement("li");
-
 
     //clicking on project
     li.onclick = () => {

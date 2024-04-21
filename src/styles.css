@@ -3,7 +3,7 @@
 
 /* TODO: ADD OVERFLOW ON PROJECT TASKS */
 :root {
-  font-size: 16px;
+  font-size: 14px;
   font-family: "Inter", sans-serif;
   --base-color: #f8f9fa;
   --primary-color: #f5f5f5;
@@ -178,6 +178,17 @@ li {
   margin: 1rem;
 }
 
+.project-create{
+  display: flex;
+  flex-flow: column;
+
+  max-width: 40rem;
+  width: 90%;
+  padding: 1rem;
+  gap: 2rem;
+
+  border-radius: 1rem;
+}
 #content {
   grid-column: 1/2;
   background-color: var(--secondary-color);
