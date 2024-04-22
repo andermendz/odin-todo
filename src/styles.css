@@ -178,7 +178,7 @@ li {
   margin: 1rem;
 }
 
-.project-create{
+.project-create {
   display: flex;
   flex-flow: column;
 
@@ -223,9 +223,9 @@ li {
   display: flex;
   flex-flow: column;
 
-  max-width: 40rem;
-  width: 90%;
-  padding: 1rem;
+
+
+
   gap: 2rem;
 
   border-radius: 1rem;
@@ -233,8 +233,8 @@ li {
 
 .project-content-elements {
   display: flex;
-  width: 90%;
-
+  width: 94%;
+  max-width: 40rem;
   flex-flow: column;
   padding: 1rem;
   gap: 1rem;
@@ -242,6 +242,14 @@ li {
   border-radius: 1rem;
 }
 
+.checkbox{
+  width: 20px;
+  height: 20px;
+  background-color: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+
+}
 #create-project {
   align-self: center;
   width: 80%;
@@ -352,6 +360,7 @@ li {
 
 .task-options {
   display: flex;
+  align-items: center;
   gap: 1rem;
   border-radius: 1rem;
   padding: 0.3rem;
