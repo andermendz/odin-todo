@@ -1,7 +1,9 @@
 class task {
-  constructor(name, status) {
+  constructor(name, status, dueDate, priority) {
     this.name = name;
     this.status = status;
+    this.dueDate = dueDate;
+    this.priority = priority;
   }
 
   sayHello() {
@@ -9,9 +11,10 @@ class task {
   }
 }
 
-export function createTask(name, status) {
+export function createTask(name, status, dueDate, priority) {
   
-  let newTaskObject = new task(name, status)
+  let newTaskObject = new task(name, status, dueDate, priority)
   
   return newTaskObject;
 }
+ 

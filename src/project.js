@@ -13,15 +13,13 @@ class project {
   }
 }
 
-// TODO: CHANGE STATUS OF TASK / DONE - UNDONE  and DELETE PROJECTS, CHANGE NAME,ETC.
-
+// TODO:   DELETE PROJECTS, CHANGE NAME,ETC. // FORMS VALIDATION, SEPARATE PROJECT TASKS AND NOTES
 
 //MAIN DOCUMENT ELEMENTS
 let homeMenu = document.querySelector(".home-menu");
 
-let projectCreateSection = document.querySelector(".project-create")
+let projectCreateSection = document.querySelector(".project-create");
 let projectContentPage = document.querySelector(".project-content");
-
 
 // DECLARES STORAGE VARIABLE
 let projects = localStorage.getItem("projectsStorage")
@@ -31,7 +29,6 @@ let projects = localStorage.getItem("projectsStorage")
 // UPDATE STORAGE FUNCTION
 function updateStorage() {
   localStorage.setItem("projectsStorage", JSON.stringify(projects));
-
 }
 
 loadProjects();
@@ -46,7 +43,7 @@ export function createProject() {
   let description = projectInputDescription.value;
   let newProject = new project(name, description, []);
   projects.push(newProject);
-  updateStorage()
+  updateStorage();
   console.log(JSON.stringify(projects));
 
   projectForm.reset();
@@ -54,22 +51,19 @@ export function createProject() {
   loadProjects();
 }
 
-// PROJECTS LOADING 
+// PROJECTS LOADING
 export function loadProjects() {
   let projectsList = document.getElementById("projects-list");
   projectsList.innerHTML = "";
 
   for (let i = 0; i < projects.length; i++) {
     function loadSelectedProject() {
-
       // DECLARES PROJECT SECTION
       let projectContent = document.querySelector(".project-content");
 
       function cleanProjectInfo() {
         projectContent.innerHTML = "";
       }
-
-
 
       projectCreateSection.style.display = "none";
       cleanProjectInfo();
@@ -104,10 +98,30 @@ export function loadProjects() {
       // TASK INPUT SECTION
       let taskInputSection = document.createElement("div");
       taskInputSection.classList.add("newtask-input-container");
-      taskInputSection.innerHTML = ` <input id="newtask-input" type="text">
-       <div class="save-newtask">   <span class="material-symbols-outlined">
+      taskInputSection.innerHTML = ` 
+      <div class="task-inputs">    
+       <input id="newtask-input-text" type="text" required>
+
+       <div>
+
+       <input id="newtask-duedate" type="date" required>
+
+       <select class="priority-selector"name="priority" id="newtask-priority" required>
+       <option selected disabled hidden> Select A Priority </option>
+         <option value="critical">Critical Priority</option>
+         <option value="high">High Priority</option>
+         <option value="medium">Medium Priority</option>
+         <option value="low">Low Priority</option>
+         <option value="non-priority">Not A Priority</option>
+       </select>
+
+       </div>
+     
+      </div>
+ 
+       <div class="save-newtask"> <div> <span class="material-symbols-outlined">
        save
-       </span></div>
+       </span></div>  </div> 
     
        `;
 
@@ -118,34 +132,38 @@ export function loadProjects() {
       add
       </span></div>`;
 
-      let newTaskInput = taskInputSection.querySelector("#newtask-input");
+      let newTaskInput = taskInputSection.querySelector("#newtask-input-text");
+      let newTaskDueDate = taskInputSection.querySelector("#newtask-duedate")
+      let newTaskPriority = taskInputSection.querySelector("#newtask-priority")
       let saveNewTaskButton = taskInputSection.querySelector(".save-newtask");
 
-      saveNewTaskButton.style.display = "none";
 
-      newTaskInput.oninput = function () {
-        if (newTaskInput.value.length > 0) {
-          console.log("Task Name" + newTaskInput.value);
-          saveNewTaskButton.style.display = "flex";
-        } else {
-          console.log("No Task Name");
-          saveNewTaskButton.style.display = "none";
-        }
-      };
+
+      // newTaskInput.oninput = function () {
+      //   if (newTaskInput.value.length > 0) {
+      //     console.log("Task Name" + newTaskInput.value);
+   
+      //     saveNewTaskButton.style.display = "flex";
+      //   } else {
+      //     console.log("No Task Name");
+      //     saveNewTaskButton.style.display = "none";
+      //   }
+      // };
 
       projectPageTasks.appendChild(taskAdd);
       projectPageTasks.appendChild(taskInputSection);
-    
 
-      taskAdd.onclick = () => { };
+      taskAdd.onclick = () => {};
 
       // TASK ADDING TO PROJECT
       saveNewTaskButton.onclick = () => {
         console.log(newTaskInput.value);
-        let newTaskObject = createTask(newTaskInput.value, "incomplete");
+        console.log(newTaskDueDate.value)
+        console.log(newTaskPriority.value)
+        let newTaskObject = createTask(newTaskInput.value, "incomplete", newTaskDueDate.value, newTaskPriority.value );
         projects[i].tasks.push(newTaskObject);
 
-        updateStorage()
+        updateStorage();
         loadSelectedProject();
         console.log(projects);
       };
@@ -160,7 +178,9 @@ export function loadProjects() {
         <div class="task-content">
         <div class="task-text">${projects[i].tasks[j].name}</div>
         <div class= " task-options">
-        <input type="checkbox" class="checkbox" ${projects[i].tasks[j].status == 'done' ? 'checked' : ''}>
+        <input type="checkbox" class="checkbox" ${
+          projects[i].tasks[j].status == "done" ? "checked" : ""
+        }>
         <span class="material-symbols-outlined delete-task">delete</span>
         </div>
         </div>
@@ -173,23 +193,21 @@ export function loadProjects() {
         deleteTaskButton.onclick = () => {
           projects[i].tasks.splice(j, 1);
           console.log(projects[i].tasks);
-          updateStorage()
+          updateStorage();
           loadSelectedProject();
         };
 
-        let taskCheckbox = div.querySelector(".task-options>.checkbox")
+        let taskCheckbox = div.querySelector(".task-options>.checkbox");
         taskCheckbox.onclick = () => {
-          
-          if (projects[i].tasks[j].status == "incomplete"){
+          if (projects[i].tasks[j].status == "incomplete") {
             projects[i].tasks[j].status = "done";
-          } else if (projects[i].tasks[j].status == "done"){
+          } else if (projects[i].tasks[j].status == "done") {
             projects[i].tasks[j].status = "incomplete";
           }
           console.log(projects[i].tasks);
-          updateStorage()
-          console.log(`Status of task: ${projects[i].tasks[j].name} changed`)
-        }
-
+          updateStorage();
+          console.log(`Status of task: ${projects[i].tasks[j].name} changed`);
+        };
 
         projectPageTasks.appendChild(div);
       }
@@ -197,7 +215,6 @@ export function loadProjects() {
       projectContentPage.style.display = "flex";
     }
 
-    // TODO: reduce redundance
     let li = document.createElement("li");
 
     //clicking on project
