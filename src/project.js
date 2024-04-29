@@ -73,7 +73,16 @@ export function loadProjects() {
     <div class="project-content-elements-title"></div>
     <div class="project-description"></div>
   </div>
-  <div class="project-content-elements" id="project-tasks"></div>
+  <div class="project-content-elements" id="project-tasks">
+  <div class="project-content-elements" id="project-tasks-form">
+  
+  </div> 
+  
+  
+  
+  </div>
+  <div class="project-content-elements" id="project-tasks-container" >
+  </div>
 
 
 
@@ -83,7 +92,7 @@ export function loadProjects() {
     <div class="project-content-elements" id="project-notes">
     
     <div class="project-note-container">
-    dadsadsa
+    dadsadsas
     </div>
 
     </div>
@@ -107,8 +116,11 @@ export function loadProjects() {
       let projectPageDescription = projectContent.querySelector(
         ".project-description"
       );
-      let projectPageTasks = projectContent.querySelector("#project-tasks");
+      let projectPageTasks = projectContent.querySelector("#project-tasks-form");
       let projectPageNotes = projectContent.querySelector("#project-notes")
+
+      let projectTasksContainer = projectContent.querySelector("#project-tasks-container")
+     
 
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
@@ -173,6 +185,7 @@ export function loadProjects() {
 
       projectPageTasks.appendChild(taskAdd);
       projectPageTasks.appendChild(taskInputSection);
+      projectPageTasks.appendChild(projectTasksContainer);
 
       taskAdd.onclick = () => {};
 
@@ -230,7 +243,7 @@ export function loadProjects() {
           console.log(`Status of task: ${projects[i].tasks[j].name} changed`);
         };
 
-        projectPageTasks.appendChild(div);
+        projectTasksContainer.appendChild(div);
       }
 
       projectContentPage.style.display = "grid";
