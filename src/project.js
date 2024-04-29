@@ -68,11 +68,31 @@ export function loadProjects() {
       projectCreateSection.style.display = "none";
       cleanProjectInfo();
 
-      projectContent.innerHTML = `   <div class="project-content-elements">
+      projectContent.innerHTML = `  
+  <div class="project-content-elements" id="project-info">
     <div class="project-content-elements-title"></div>
     <div class="project-description"></div>
   </div>
   <div class="project-content-elements" id="project-tasks"></div>
+
+
+
+  <div class="project-content-elements" id="project-notes-container">
+  
+    <div class="project-content-elements-title">Notes</div>
+    <div class="project-content-elements" id="project-notes">
+    
+    <div class="project-note-container">
+    dadsadsa
+    </div>
+
+    </div>
+
+ 
+
+ 
+
+  </div>
 `;
       // HOME MENU FUNCTIONS
 
@@ -88,6 +108,7 @@ export function loadProjects() {
         ".project-description"
       );
       let projectPageTasks = projectContent.querySelector("#project-tasks");
+      let projectPageNotes = projectContent.querySelector("#project-notes")
 
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
@@ -212,7 +233,7 @@ export function loadProjects() {
         projectPageTasks.appendChild(div);
       }
 
-      projectContentPage.style.display = "flex";
+      projectContentPage.style.display = "grid";
     }
 
     let li = document.createElement("li");
