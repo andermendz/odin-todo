@@ -122,6 +122,7 @@ li {
   padding: 1rem;
 }
 
+
 .options-list > li > .material-symbols-outlined {
   font-size: 2rem;
 }
@@ -253,7 +254,7 @@ li {
 
   overflow: auto;
   
-  height: 24rem;
+  max-height: 24rem;
   display: flex;
   flex-flow: column;
   padding: 1rem;
@@ -262,18 +263,34 @@ li {
   border-radius: 1rem;
 }
 
-#project-notes-container{
+#project-notes-section{
+ 
   max-width: 80rem;
   grid-column: 2/3;
   grid-row: 1/3;
 }
 
+.notes-form-container{
+
+}
+textarea#notes-textarea{
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+resize: vertical;
+  width: 80%;
+  height: 5rem;
+
+}
+
 #project-notes{
+  display: flex;
+  gap: 2rem;
  max-width: 100%;
  overflow: auto;
 }
 
-.project-note-container{
+.project-notes{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -409,7 +426,7 @@ li {
   outline: none;
   transition: all 0.4s ease-in;
 }
-.save-newtask {
+.save-button {
   display: flex;
   align-items: center;
   justify-content: center;

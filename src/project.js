@@ -75,10 +75,8 @@ export function loadProjects() {
   </div>
   <div class="project-content-elements" id="project-tasks">
   <div class="project-content-elements" id="project-tasks-form">
-  
+
   </div> 
-  
-  
   
   </div>
   <div class="project-content-elements" id="project-tasks-container" >
@@ -86,14 +84,24 @@ export function loadProjects() {
 
 
 
-  <div class="project-content-elements" id="project-notes-container">
-  
+
+  <div class="project-content-elements" id="project-notes-section">
     <div class="project-content-elements-title">Notes</div>
     <div class="project-content-elements" id="project-notes">
-    
-    <div class="project-note-container">
+    <div class="notes-form-container">
+    <textarea name="notes-text" id="notes-textarea"></textarea>
+    <div class="save-button" id="save-newnote">
+  <span class="material-symbols-outlined">save</span>
+</div>
+    </div>
+
+    <div id="project-notes-container">
+    <div class="project-notes">
     dadsadsas
     </div>
+    </div>
+  
+
 
     </div>
 
@@ -116,11 +124,14 @@ export function loadProjects() {
       let projectPageDescription = projectContent.querySelector(
         ".project-description"
       );
-      let projectPageTasks = projectContent.querySelector("#project-tasks-form");
-      let projectPageNotes = projectContent.querySelector("#project-notes")
+      let projectPageTasks = projectContent.querySelector(
+        "#project-tasks-form"
+      );
+      let projectPageNotes = projectContent.querySelector("#project-notes");
 
-      let projectTasksContainer = projectContent.querySelector("#project-tasks-container")
-     
+      let projectTasksContainer = projectContent.querySelector(
+        "#project-tasks-container"
+      );
 
       projectPageTitle.innerHTML = projects[i].name;
       projectPageDescription.innerHTML = projects[i].description;
@@ -132,7 +143,8 @@ export function loadProjects() {
       let taskInputSection = document.createElement("div");
       taskInputSection.classList.add("newtask-input-container");
       taskInputSection.innerHTML = ` 
-      <div class="task-inputs">    
+      <div class="task-inputs">  
+     
        <input id="newtask-input-text" type="text" required>
 
        <div>
@@ -140,7 +152,7 @@ export function loadProjects() {
        <input id="newtask-duedate" type="date" required>
 
        <select class="priority-selector"name="priority" id="newtask-priority" required>
-       <option selected disabled hidden> Select A Priority </option>
+       <option value="" selected disabled> Select A Priority </option>
          <option value="critical">Critical Priority</option>
          <option value="high">High Priority</option>
          <option value="medium">Medium Priority</option>
@@ -152,7 +164,7 @@ export function loadProjects() {
      
       </div>
  
-       <div class="save-newtask"> <div> <span class="material-symbols-outlined">
+       <div class="save-button" id="save-newtask"> <div> <span class="material-symbols-outlined">
        save
        </span></div>  </div> 
     
@@ -166,16 +178,14 @@ export function loadProjects() {
       </span></div>`;
 
       let newTaskInput = taskInputSection.querySelector("#newtask-input-text");
-      let newTaskDueDate = taskInputSection.querySelector("#newtask-duedate")
-      let newTaskPriority = taskInputSection.querySelector("#newtask-priority")
-      let saveNewTaskButton = taskInputSection.querySelector(".save-newtask");
-
-
+      let newTaskDueDate = taskInputSection.querySelector("#newtask-duedate");
+      let newTaskPriority = taskInputSection.querySelector("#newtask-priority");
+      let saveNewTaskButton = taskInputSection.querySelector("#save-newtask");
 
       // newTaskInput.oninput = function () {
       //   if (newTaskInput.value.length > 0) {
       //     console.log("Task Name" + newTaskInput.value);
-   
+
       //     saveNewTaskButton.style.display = "flex";
       //   } else {
       //     console.log("No Task Name");
@@ -191,12 +201,34 @@ export function loadProjects() {
 
       // TASK ADDING TO PROJECT
       saveNewTaskButton.onclick = () => {
+        // Validate form fields
+        if (!newTaskInput.value.trim()) {
+          alert("Please enter a task name.");
+          return;
+        }
+      
+        if (!newTaskDueDate.value) {
+          alert("Please select a due date.");
+          return;
+        }
+      
+        if (!newTaskPriority.value) {
+          alert("Please select a priority.");
+          return;
+        }
+      
+        // If all fields are valid, proceed with creating the task
         console.log(newTaskInput.value);
-        console.log(newTaskDueDate.value)
-        console.log(newTaskPriority.value)
-        let newTaskObject = createTask(newTaskInput.value, "incomplete", newTaskDueDate.value, newTaskPriority.value );
+        console.log(newTaskDueDate.value);
+        console.log(newTaskPriority.value);
+        let newTaskObject = createTask(
+          newTaskInput.value,
+          "incomplete",
+          newTaskDueDate.value,
+          newTaskPriority.value
+        );
         projects[i].tasks.push(newTaskObject);
-
+      
         updateStorage();
         loadSelectedProject();
         console.log(projects);
