@@ -86,25 +86,26 @@ export function loadProjects() {
 
 
   <div class="project-content-elements" id="project-notes-section">
-    <div class="project-content-elements-title">Notes</div>
-    <div class="project-content-elements" id="project-notes">
-    <div class="notes-form-container">
-    <textarea name="notes-text" id="notes-textarea"></textarea>
-    <div class="save-button" id="save-newnote">
-  <span class="material-symbols-outlined">save</span>
-</div>
-    </div>
-
-    <div id="project-notes-container">
-    <div class="project-notes">
-    dadsadsas
-    </div>
-    </div>
+  <div class="project-content-elements-title">Notes</div>
+  <div class="project-content-elements" id="project-notes">
+  <div class="notes-form-container">
+  <textarea name="notes-text" id="notes-textarea"></textarea>
+  <input id="newnote-type"  value="note" required hidden>
+  <div class="save-button" id="save-newnote">
+    <span class="material-symbols-outlined">save</span>
+  </div>
   
+  </div>
 
-
+  <div id="project-notes-container">
+  
     </div>
 
+
+
+
+</div>
+</div>
  
 
  
@@ -127,10 +128,13 @@ export function loadProjects() {
       let projectPageTasks = projectContent.querySelector(
         "#project-tasks-form"
       );
-      let projectPageNotes = projectContent.querySelector("#project-notes");
 
       let projectTasksContainer = projectContent.querySelector(
         "#project-tasks-container"
+      );
+
+      let projectNotesContainer = projectContent.querySelector(
+        "#project-notes-container"
       );
 
       projectPageTitle.innerHTML = projects[i].name;
@@ -146,10 +150,11 @@ export function loadProjects() {
       <div class="task-inputs">  
      
        <input id="newtask-input-text" type="text" required>
-
+       <input id="newtask-type"  value="task" required hidden>
        <div>
 
        <input id="newtask-duedate" type="date" required>
+      
 
        <select class="priority-selector"name="priority" id="newtask-priority" required>
        <option value="" selected disabled> Select A Priority </option>
@@ -170,34 +175,29 @@ export function loadProjects() {
     
        `;
 
-      //TASK ADDING SECTION SCRIPT
-      let taskAdd = document.createElement("div");
-
-      taskAdd.innerHTML = `<div class = "add-task"> <span class="material-symbols-outlined">
-      add
-      </span></div>`;
-
+    
+      // TASKS
       let newTaskInput = taskInputSection.querySelector("#newtask-input-text");
+      let newTaskType = taskInputSection.querySelector("#newtask-type");
       let newTaskDueDate = taskInputSection.querySelector("#newtask-duedate");
       let newTaskPriority = taskInputSection.querySelector("#newtask-priority");
       let saveNewTaskButton = taskInputSection.querySelector("#save-newtask");
 
-      // newTaskInput.oninput = function () {
-      //   if (newTaskInput.value.length > 0) {
-      //     console.log("Task Name" + newTaskInput.value);
 
-      //     saveNewTaskButton.style.display = "flex";
-      //   } else {
-      //     console.log("No Task Name");
-      //     saveNewTaskButton.style.display = "none";
-      //   }
-      // };
+      //NOTES
+      let newNoteInput = projectContent.querySelector("#notes-textarea")
+      let newNoteType = projectContent.querySelector("#newnote-type");
+      let saveNewNoteButton = projectContent.querySelector("#save-newnote");
+      
 
-      projectPageTasks.appendChild(taskAdd);
+
+  
+
+
       projectPageTasks.appendChild(taskInputSection);
       projectPageTasks.appendChild(projectTasksContainer);
 
-      taskAdd.onclick = () => {};
+
 
       // TASK ADDING TO PROJECT
       saveNewTaskButton.onclick = () => {
@@ -206,76 +206,142 @@ export function loadProjects() {
           alert("Please enter a task name.");
           return;
         }
-      
+
         if (!newTaskDueDate.value) {
           alert("Please select a due date.");
           return;
         }
-      
+
         if (!newTaskPriority.value) {
           alert("Please select a priority.");
           return;
         }
-      
+
         // If all fields are valid, proceed with creating the task
         console.log(newTaskInput.value);
         console.log(newTaskDueDate.value);
         console.log(newTaskPriority.value);
         let newTaskObject = createTask(
           newTaskInput.value,
+          newTaskType.value,
           "incomplete",
           newTaskDueDate.value,
           newTaskPriority.value
         );
         projects[i].tasks.push(newTaskObject);
-      
+
         updateStorage();
         loadSelectedProject();
         console.log(projects);
       };
 
+        // NOTE ADDING TO PROJECT
+        saveNewNoteButton.onclick = () => {
+          // Validate form fields
+          if (!newNoteInput.value.trim()) {
+            alert("Please write a note.");
+            return;
+          }
+  
+         
+  
+          // If the note field is valid, proceed with creating the task
+         
+          console.log(newNoteInput.value);
+
+          let newTaskObject = createTask(
+            newNoteInput.value,
+            newNoteType.value,
+            "",
+            "",
+            "",
+          );
+          projects[i].tasks.push(newTaskObject);
+  
+          updateStorage();
+          loadSelectedProject();
+          console.log(projects);
+        };
+
       // TASKS STRUCTURE
       console.log(projects[i].tasks);
       // PROJECT TASK LOADING
       for (let j = 0; j < projects[i].tasks.length; j++) {
-        let div = document.createElement("div");
-        div.innerHTML = `
-    
-        <div class="task-content">
-        <div class="task-text">${projects[i].tasks[j].name}</div>
-        <div class= " task-options">
-        <input type="checkbox" class="checkbox" ${
-          projects[i].tasks[j].status == "done" ? "checked" : ""
-        }>
-        <span class="material-symbols-outlined delete-task">delete</span>
-        </div>
-        </div>
+
+        if (projects[i].tasks[j].type == "task"){
+
+          let div = document.createElement("div");
+          div.innerHTML = `
       
-       `;
+          <div class="task-content">
+          <div class="task-text">${projects[i].tasks[j].name}</div>
+          <div class= " task-options">
+          <input type="checkbox" class="checkbox" ${
+            projects[i].tasks[j].status == "done" ? "checked" : ""
+          }>
+          <span class="material-symbols-outlined delete-task">delete</span>
+          </div>
+          </div>
+        
+         `;
+  
+          // DELETE TASK FROM PROJECT
+  
+          let deleteTaskButton = div.querySelector(".delete-task");
+          deleteTaskButton.onclick = () => {
+            projects[i].tasks.splice(j, 1);
+            console.log(projects[i].tasks);
+            updateStorage();
+            loadSelectedProject();
+          };
+  
+          let taskCheckbox = div.querySelector(".task-options>.checkbox");
+          taskCheckbox.onclick = () => {
+            if (projects[i].tasks[j].status == "incomplete") {
+              projects[i].tasks[j].status = "done";
+            } else if (projects[i].tasks[j].status == "done") {
+              projects[i].tasks[j].status = "incomplete";
+            }
+            console.log(projects[i].tasks);
+            updateStorage();
+            console.log(`Status of task: ${projects[i].tasks[j].name} changed`);
+          };
+  
+          projectTasksContainer.appendChild(div);
 
-        // DELETE TASK FROM PROJECT
 
-        let deleteTaskButton = div.querySelector(".delete-task");
-        deleteTaskButton.onclick = () => {
-          projects[i].tasks.splice(j, 1);
-          console.log(projects[i].tasks);
-          updateStorage();
-          loadSelectedProject();
-        };
+        } else if (projects[i].tasks[j].type == "note"){
 
-        let taskCheckbox = div.querySelector(".task-options>.checkbox");
-        taskCheckbox.onclick = () => {
-          if (projects[i].tasks[j].status == "incomplete") {
-            projects[i].tasks[j].status = "done";
-          } else if (projects[i].tasks[j].status == "done") {
-            projects[i].tasks[j].status = "incomplete";
-          }
-          console.log(projects[i].tasks);
-          updateStorage();
-          console.log(`Status of task: ${projects[i].tasks[j].name} changed`);
-        };
+          
+          let div = document.createElement("div");
+          div.innerHTML = `
+      
+          <div class="task-content">
+          <div class="task-text">${projects[i].tasks[j].name}</div>
+          <div class= " note-options">
+         
+          <span class="material-symbols-outlined delete-task">delete</span>
+          </div>
+          </div>
+        
+         `;
+  
+          // DELETE TASK FROM PROJECT
+  
+          let deleteTaskButton = div.querySelector(".delete-task");
+          deleteTaskButton.onclick = () => {
+            projects[i].tasks.splice(j, 1);
+            console.log(projects[i].tasks);
+            updateStorage();
+            loadSelectedProject();
+          };
+  
+       
+  
+          projectNotesContainer.appendChild(div);
 
-        projectTasksContainer.appendChild(div);
+        }
+
       }
 
       projectContentPage.style.display = "grid";
