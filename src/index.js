@@ -7,5 +7,7 @@ let createProjectButton = document.getElementById("create-project");
 
 createProjectButton.onclick = (e) => {
   e.preventDefault();
+  
+
   createProject();
 };

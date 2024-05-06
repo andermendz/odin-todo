@@ -39,6 +39,18 @@ export function createProject() {
   let projectInputDescription = document.getElementById("description");
   let projectForm = document.getElementById("projects-form");
 
+  if (!projectInputName.value.trim()){
+    alert("Set a name for your project")
+    return
+  }
+
+  if (!projectInputDescription.value.trim()){
+    alert("Set a description for your Project")
+    return
+  }
+
+
+
   let name = projectInputName.value;
   let description = projectInputDescription.value;
   let newProject = new project(name, description, []);
@@ -70,8 +82,14 @@ export function loadProjects() {
 
       projectContent.innerHTML = `  
   <div class="project-content-elements" id="project-info">
-    <div class="project-content-elements-title"></div>
-    <div class="project-description"></div>
+  <div class="project-details">
+  <div class="project-content-elements-title"></div>
+  <div class="project-description"></div>
+  </div>
+ 
+  <div class="project-actions">
+  <span class="material-symbols-outlined delete-project">delete</span>
+  </div>
   </div>
   <div class="project-content-elements" id="project-tasks">
   <div class="project-content-elements" id="project-tasks-form">
@@ -345,6 +363,17 @@ export function loadProjects() {
       }
 
       projectContentPage.style.display = "grid";
+
+      let deleteProjectButton = projectContent.querySelector(".delete-project");
+      deleteProjectButton.onclick = () => {
+        projects.splice(i, 1);
+        console.log(projects);
+        updateStorage();
+        
+        homeMenu.click();
+        loadProjects();
+      };
+
     }
 
     let li = document.createElement("li");

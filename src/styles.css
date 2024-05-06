@@ -231,11 +231,25 @@ li {
 
 
 #project-info {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2rem;
+  grid-template-rows: 1fr 1fr;
+ 
+  flex-flow: row;
   grid-column: 1/2;
   grid-row: 1/2;
 }
 
+.project-details{
+  grid-column: 1/2;
+  
+  display: flex;
+  flex-flow: column;
+}
+.project-actions{
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
 #project-tasks-form {
   grid-column: 1/2;
   grid-row: 2/3;
@@ -353,9 +367,15 @@ resize: vertical;
 }
 .project-content-elements-title {
   margin-inline-start: 1rem;
-  margin-block: 1rem;
+  
   font-size: 2rem;
   font-weight: 700;
+}
+
+.project-description {
+  margin-inline-start: 1rem;
+
+
 }
 
 .task-content {
